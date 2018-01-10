@@ -42,31 +42,50 @@ int main(void)
 	}
 	SystemTimerInit();
 	SerialMessagesInit();
+	SerialMessagesSend(tempBuff1, sizeof(tempBuff1));
+//	worktime = GetCurrentTime();
+//	while((GetCurrentTime() - worktime) < 1200)
+//	{
+//
+//	}
+//	SetBaudrate(9600);
+//	SerialSymbolSend(0x0F);
+//	SetBaudrate(57600);
 //	crcNew = crc8(tempBuff, (sizeof(tempBuff) - 1));
 //	tempBuff[4] = crcNew;
 
+	//SerialMessagesSend(tempBuff1, sizeof(tempBuff1));
 //	gpioSetup();
 //	worktime = GetCurrentTime();
 //	while((GetCurrentTime() - worktime) < 1200)
 //	{
 //
 //	}
-//	gpio_clear(GPIOA, GPIO2);
-//	for(int i = 0; i < 22; i++) {
-//		__asm__("nop");
+//	gpio_set(GPIOB, GPIO10);
+//	worktime = GetCurrentTime();
+//	while((GetCurrentTime() - worktime) < 2000)
+//	{
+//
 //	}
-	//SerialMessagesSend(tempBuff, sizeof(tempBuff));
+//	gpio_clear(GPIOB, GPIO10);
+//	worktime = GetCurrentTime();
+//	while((GetCurrentTime() - worktime) < 500)
+//	{
+//
+//	}
+//	gpio_set_mode(GPIOB, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, GPIO10);
+//	SerialMessagesSend(tempBuff1, sizeof(tempBuff1));
 //	SerialMessagesSend("******************************\n", sizeof("******************************\n"));
 //	SerialMessagesSend("Servo board STM32F103TB based\n", sizeof("Servo board STM32F103TB based\n"));
 //	SerialMessagesSend("******************************\n", sizeof("******************************\n"));
 //	ledSetup();
-	timeNow = GetCurrentTime();
+//	timeNow = GetCurrentTime();
     while (1) {
-//    	__asm__("nop");
-    	if ((GetCurrentTime() - timeNow) > 250000) {
-    		timeNow = GetCurrentTime();
-    		SerialMessagesSend(tempBuff1, sizeof(tempBuff1));
-    	}
+    	__asm__("nop");
+//    	if ((GetCurrentTime() - timeNow) > 250000) {
+//    		timeNow = GetCurrentTime();
+//    		SerialMessagesSend(tempBuff1, sizeof(tempBuff1));
+//    	}
 	}
 
 	return 0;
@@ -105,9 +124,9 @@ static void ledSetup(void)
 
 static void gpioSetup(void)
 {
-	rcc_periph_clock_enable(RCC_GPIOA);
-	gpio_set_mode(GPIOA, GPIO_MODE_OUTPUT_50_MHZ, GPIO_CNF_OUTPUT_PUSHPULL, GPIO2);
-	gpio_set(GPIOA, GPIO2);
+	rcc_periph_clock_enable(RCC_GPIOB);
+	gpio_set_mode(GPIOB, GPIO_MODE_OUTPUT_50_MHZ, GPIO_CNF_OUTPUT_OPENDRAIN, GPIO10);
+	gpio_clear(GPIOB, GPIO10);
 }
 
 static uint8_t rccSetup(void)
